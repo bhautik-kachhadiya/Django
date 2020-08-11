@@ -1,0 +1,28 @@
+{% extends 'blog/base.html'%}
+
+{% block content %}
+
+{% for post in post_list %}
+<h2>Available Blogs as follows...</h2>
+<h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+<p>Published on : {{post.published_date|date:"D M Y"}}</p>
+<a href="{% url 'post_detail' pk=post.pk %}">Comments : {{post.approve_comments.count}}</a>
+
+{% endfor %}
+
+{% if post.pk == None %}
+
+<h3 style="color: orangered;">Post List is Empty!!!</h3> 
+
+{% endif%}
+{% if user.is_authenticated %}
+    <h4>click to NEW POST to add new blog.</h4>
+{% else%}
+    <h4>Login & click to NEW POST to add new blog.</h4>
+{%endif%}
+
+{% endblock %}
+
+
+
+
